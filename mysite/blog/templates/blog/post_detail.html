@@ -18,8 +18,8 @@
 
 
       {% if user.is_authenticated %}
-          <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-          <a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+          <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}"><i class="far fa-edit"> Edit</i></a>
+          <a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}"><i class="fa fa-trash"> Trash</i></button></a>
       {% endif %}
 
 
@@ -35,8 +35,8 @@
 
               {{ comment.created_date }}
               {% if not comment.approved_comment %}
-                  <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                  <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                  <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><i class="fa fa-trash"></i> Trash</button></a>
+                  <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><i class="far fa-thumbs-up"></i> Publish</a>
               {% endif %}
 
           <p>{{ comment.text|safe|linebreaks }}</p>
