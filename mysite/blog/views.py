@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.urls import reverse_lazy
 from django.utils import timezone
 from blog.models import Post, Comment
+from django.db.models import Q
 from blog.forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -44,6 +45,14 @@ class DraftListView(LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by('created_date')
+
+def PostSearchListView(request):
+    if ('q' in request.GET):
+        q = request.GET['q']
+        post_list = Post.objects.filter(text__icontains=q)
+        return render(request, 'search_results.html', {'post_list': post_list, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')
 
 #######################################
 ## Functions that require a pk match ##
