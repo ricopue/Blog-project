@@ -15,4 +15,7 @@
         </div>
     {% endfor %}
 </div>
+
+{% include 'paginator.html' with page_obj=post_list %}
+
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.urls import reverse_lazy
 from django.utils import timezone
 from blog.models import Post, Comment
@@ -15,7 +16,7 @@ class AboutView(TemplateView):
 
 class PostListView(ListView):
     model = Post
-
+    paginate_by = 10
     def get_queryset(self):
         return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
