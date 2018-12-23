@@ -11,6 +11,9 @@
             <div class="date">
                 <p>Published on: {{ post.published_date|date:"D M Y"}}</p>
             </div>
+            <div>
+                <p>{{ post.description }}</p>
+            </div>
             <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
         </div>
     {% endfor %}
@@ -21,7 +24,7 @@
     <ul class="pagination">
   {% if page_obj.has_previous %}
     <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
-      
+
   {% endif %}
   {% for i in page_obj.paginator.page_range %}
     {% if page_obj.number == i %}

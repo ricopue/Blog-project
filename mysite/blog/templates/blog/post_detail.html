@@ -14,6 +14,10 @@
             <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
         {% endif %}
 
+      <div>
+            <img src="{{ post.post_pic.url }}">
+      </div>
+
       <p class='postcontent' >{{ post.text|safe|linebreaksbr }}</p>
 
 

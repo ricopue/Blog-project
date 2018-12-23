@@ -23,6 +23,13 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
 
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        obj = self.get_object()
+        obj.page_click = obj.page_click + 1
+        obj.save()
+        return context
+
 class CreatePostView(LoginRequiredMixin,CreateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
